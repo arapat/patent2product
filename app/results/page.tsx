@@ -25,13 +25,33 @@ function ResultsContent() {
       // Simulate API call - in a real app, you'd call your API here
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // For demo purposes, use mock data
-      setResults(MOCK_PATENTS);
+      // Filter patents based on search term
+      const searchLower = searchTerm.toLowerCase().trim();
+      const filtered = MOCK_PATENTS.filter(patent => {
+        // Search in title
+        if (patent.title.toLowerCase().includes(searchLower)) return true;
+
+        // Search in summary
+        if (patent.summary.toLowerCase().includes(searchLower)) return true;
+
+        // Search in product idea
+        if (patent.productIdea.toLowerCase().includes(searchLower)) return true;
+
+        // Search in patent number
+        if (patent.patentNumber.toLowerCase().includes(searchLower)) return true;
+
+        // Search in tags
+        if (patent.tags.some(tag => tag.toLowerCase().includes(searchLower))) return true;
+
+        return false;
+      });
+
+      setResults(filtered);
       setStatus(LoadingState.SUCCESS);
     } catch (error) {
       console.error(error);
       setStatus(LoadingState.ERROR);
-      setResults(MOCK_PATENTS);
+      setResults([]);
     }
   };
 

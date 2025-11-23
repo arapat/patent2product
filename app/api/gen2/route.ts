@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     }
 
     const meta = JSON.parse(metaRaw);
-    const { patent_url, patent_id, title, abstract } = meta;
+    const { patent_url, patent_id, title, abstract, additionalUserRequest } = meta;
 
     ////////////////////////////////////////////////////////////////////////////
     // 1) Generate JSON prompt using OpenAI
@@ -56,6 +56,7 @@ export async function POST(req: NextRequest) {
     const systemPrompt = `
 You generate JSON prompts for photorealistic renderings of inventions.
 Return ONLY valid JSON. No commentary. No markdown.
+
 
 JSON structure:
 
@@ -96,6 +97,9 @@ ${title}
 
 Abstract:
 ${abstract}
+
+Additional User Request: (optional)
+${additionalUserRequest}
 
 Generate a JSON prompt that renders this invention as a photorealistic product image based on the patent.
 `;

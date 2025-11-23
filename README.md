@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FLUX.Invent
 
-## Getting Started
+Turn design patents into photorealistic prototype renderings. Search for patents like "flying car" or "AR glasses," and the system generates high-fidelity product visualizations showing what the invention would look like as a manufactured product.
 
-First, run the development server:
+## How It Works
+
+1. **Patent Search** - User enters search term → finds relevant design patents from curated database
+2. **Visual Understanding** - Nvidia Nemotron analyzes patent drawings and abstract → extracts design elements, materials, and proportions
+3. **Image Generation** - FLUX image-to-image model transforms technical drawings → photorealistic product renderings with professional lighting and production finishes
+4. **Creative Exploration** - User writes custom prompts to generate variations: engineering blueprints, marketing shots, exploded views, lifestyle contexts, or anything else they imagine
+5. **Interactive Refinement** - Chat interface enables iteration on renderings with natural language requests
+
+## Tech Stack
+
+- **Frontend**: Next.js (TypeScript)
+- **Vision & Language**: Nvidia Nemotron (served via NIM)
+- **Image Generation**: FLUX `beta-image-232/edit` via Fal.ai
+- **Hosting**: Digital Ocean
+- **Storage**: Local browser storage
+
+## Setup
 
 ```bash
+# Install dependencies
+npm install
+
+# Environment variables (.env.local)
+NVIDIA_NIM_API_KEY=
+FAL_AI_API_KEY=
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Target Audience
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Technologists and futurists** who want to visualize unreleased future technology from recent patent filings. See what Apple's AR glasses, autonomous aircraft, or next-gen wearables might actually look like before they're announced.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Example Prompts
 
-## Learn More
+- "Generate a marketing hero shot with dramatic lighting"
+- "Show an exploded engineering view with labeled components"
+- "Create a lifestyle image with someone wearing this device"
+- "Render this in matte black carbon fiber instead of aluminum"
+- "Make a technical blueprint with dimensions and callouts"
 
-To learn more about Next.js, take a look at the following resources:
+The only limit is your creativity.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Roadmap
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [ ] USPTO patent search integration
+- [ ] User patent PDF uploads
+- [ ] Multi-image patent support (combine orthographic views)
+- [ ] 3D model exports
+- [ ] Patent comparison tool
 
-## Deploy on Vercel
+## Limitations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Renderings are AI interpretations - they show plausible production versions, not exact commercial products
+- Image quality depends on patent drawing clarity (hand-drawn figures from older patents may produce less accurate results)
+- Works best for consumer electronics, vehicles, wearables, and industrial products with clear visual form
+- Educational/research purposes only
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+All design patents are publicly available USPTO documents. This project uses AI to make technical patent drawings more accessible by visualizing them as production-ready prototypes. Generated renderings are speculative interpretations and do not represent actual products or endorsed designs by patent holders.

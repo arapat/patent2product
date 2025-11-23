@@ -3,6 +3,9 @@ import { Geist, Geist_Mono, Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import Background from "@/components/Background";
 import Navbar from "@/components/Navbar";
+import { FutureModeProvider } from "@/lib/FutureModeContext";
+import { CommandBar } from "@/components/CommandBar";
+import { FutureModeIndicator } from "@/components/FutureModeIndicator";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,13 +44,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${inter.variable} antialiased font-sans selection:bg-purple-500/30 selection:text-white`}
       >
-        <div className="relative min-h-screen text-white">
-          <Background />
-          <Navbar />
-          <main className="relative z-10">
-            {children}
-          </main>
-        </div>
+        <FutureModeProvider>
+          <div className="relative min-h-screen text-white">
+            <Background />
+            <Navbar />
+            <main className="relative z-10">
+              {children}
+            </main>
+            <CommandBar />
+            <FutureModeIndicator />
+          </div>
+        </FutureModeProvider>
       </body>
     </html>
   );

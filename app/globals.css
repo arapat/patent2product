@@ -67,12 +67,126 @@
   }
 }
 
+/* Future Mode Animations */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+  50% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 16px currentColor);
+  }
+}
+
+@keyframes hologram {
+  0%, 100% {
+    opacity: 0.9;
+    background-position: 0% 0%;
+  }
+  50% {
+    opacity: 1;
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes cyber-grid {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
+
 body {
   background-color: #f0fdf4; /* emerald-50 */
   color: #0f172a; /* slate-900 */
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Future Mode Dark Theme */
+.future-mode {
+  color-scheme: dark;
+}
+
+.future-mode body {
+  background-color: #0a0a0f;
+  color: #e2e8f0;
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: cyber-grid 20s linear infinite;
+}
+
+/* Future Mode - Scan line effect */
+.future-mode::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(6, 182, 212, 0.8) 50%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline 8s linear infinite;
+  opacity: 0.4;
+}
+
+/* Future Mode - Holographic overlay */
+.future-mode::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 182, 212, 0.02) 0%,
+      transparent 50%,
+      rgba(168, 85, 247, 0.02) 100%
+    );
+  pointer-events: none;
+  z-index: 9998;
+  animation: hologram 10s ease-in-out infinite;
 }
 
 /* Custom Scrollbar */
@@ -91,6 +205,20 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Future Mode Scrollbar */
+.future-mode ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.future-mode ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #06b6d4, #8b5cf6);
+  border-radius: 4px;
+}
+
+.future-mode ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #22d3ee, #a78bfa);
 }
 
 /* Utility classes for iOS radius */
@@ -143,4 +271,47 @@ body {
 
 .animate-fade-in {
   animation: var(--animate-fade-in);
+}
+
+/* Future Mode Utility Classes */
+.future-mode-neon-text {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.future-mode-glitch {
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Future Mode Text Shadows */
+.future-mode .text-neon-cyan {
+  color: #06b6d4;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.5),
+               0 0 20px rgba(6, 182, 212, 0.3),
+               0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.future-mode .text-neon-purple {
+  color: #a78bfa;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5),
+               0 0 20px rgba(167, 139, 250, 0.3),
+               0 0 30px rgba(167, 139, 250, 0.2);
+}
+
+/* Future Mode Glow Effects */
+.future-mode .glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4),
+              0 0 40px rgba(6, 182, 212, 0.2),
+              inset 0 0 20px rgba(6, 182, 212, 0.1);
+}
+
+.future-mode .glow-purple {
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.4),
+              0 0 40px rgba(167, 139, 250, 0.2),
+              inset 0 0 20px rgba(167, 139, 250, 0.1);
+}
+
+.future-mode .glow-pink {
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.4),
+              0 0 40px rgba(236, 72, 153, 0.2),
+              inset 0 0 20px rgba(236, 72, 153, 0.1);
 }

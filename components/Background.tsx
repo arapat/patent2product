@@ -19,7 +19,7 @@ const Background: React.FC = () => {
           isFutureMode ? 'opacity-40' : 'opacity-60'
         }`}
         style={{
-          background: isFutureMode
+          backgroundImage: isFutureMode
             ? `
               radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.3), transparent 50%),
               radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.25), transparent 50%),

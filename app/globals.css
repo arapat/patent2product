@@ -315,3 +315,76 @@ body {
               0 0 40px rgba(236, 72, 153, 0.2),
               inset 0 0 20px rgba(236, 72, 153, 0.1);
 }
+
+/* Future Mode Robust Overrides */
+/* Automatically adapt standard Slate utilities to Future Mode dark theme */
+
+/* Text Color Inversion */
+.future-mode .text-slate-900 { color: #f8fafc !important; } /* slate-50 */
+.future-mode .text-slate-800 { color: #f1f5f9 !important; } /* slate-100 */
+.future-mode .text-slate-700 { color: #e2e8f0 !important; } /* slate-200 */
+.future-mode .text-slate-600 { color: #cbd5e1 !important; } /* slate-300 */
+.future-mode .text-slate-500 { color: #94a3b8 !important; } /* slate-400 */
+.future-mode .text-slate-400 { color: #64748b !important; } /* slate-500 */
+.future-mode .text-slate-300 { color: #475569 !important; } /* slate-600 - for very muted text */
+
+/* Background Color Adaptation */
+.future-mode .bg-slate-50  { background-color: rgba(2, 6, 23, 0.5); }
+.future-mode .bg-slate-100 { 
+  background-color: rgba(30, 41, 59, 0.4); 
+  border-color: rgba(148, 163, 184, 0.1);
+}
+.future-mode .bg-slate-200 { background-color: rgba(51, 65, 85, 0.5); }
+
+/* Border Adaptation */
+.future-mode .border-slate-200 { border-color: rgba(148, 163, 184, 0.15); }
+.future-mode .border-slate-300 { border-color: rgba(148, 163, 184, 0.3); }
+
+/* Button Visibility Fixes */
+/* Make primary buttons pop in Future Mode (Cyan/Neon style) */
+.future-mode .bg-slate-900 { 
+  background-color: #06b6d4 !important; /* cyan-500 */
+  color: #0f172a !important; /* Ensure text is readable on cyan */
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
+.future-mode .bg-slate-900:hover {
+  background-color: #0891b2 !important; /* cyan-600 */
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+}
+
+/* Secondary Button/Interactive Elements */
+.future-mode .bg-white {
+  background-color: rgba(15, 23, 42, 0.8);
+  color: #f8fafc;
+}
+.future-mode .hover\:bg-white:hover {
+  background-color: rgba(30, 41, 59, 0.9);
+}
+
+/* Fix input fields */
+.future-mode input, 
+.future-mode textarea {
+  background-color: rgba(15, 23, 42, 0.6);
+  color: #f8fafc;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+.future-mode input::placeholder,
+.future-mode textarea::placeholder {
+  color: #64748b;
+}
+
+/* Fix Emerald text colors to be brighter/neon in Future Mode */
+.future-mode .text-emerald-600 { color: #34d399 !important; text-shadow: 0 0 10px rgba(52, 211, 153, 0.3); }
+.future-mode .text-emerald-700 { color: #10b981 !important; }
+.future-mode .bg-emerald-100 { background-color: rgba(6, 95, 70, 0.4); }
+.future-mode .border-emerald-200 { border-color: rgba(16, 185, 129, 0.2); }
+
+/* Fix Red error text colors for Future Mode */
+.future-mode .text-red-900 { color: #fca5a5 !important; } /* red-200 */
+.future-mode .text-red-700 { color: #f87171 !important; } /* red-300 */
+.future-mode .text-red-600 { color: #ef4444 !important; } /* red-500 - keep vibrant for icons */
+.future-mode .text-red-500 { color: #f87171 !important; } /* red-300 */
+
+/* Fix Blue link colors for Future Mode */
+.future-mode .text-blue-600 { color: #60a5fa !important; text-shadow: 0 0 8px rgba(96, 165, 250, 0.3); }
+.future-mode .text-blue-800 { color: #3b82f6 !important; text-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }

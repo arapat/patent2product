@@ -5,10 +5,13 @@ import { useRouter } from 'next/navigation';
 import SearchInput from '@/components/SearchInput';
 import { WarpBackground } from "@/components/ui/warp-background";
 import { Card, CardContent } from "@/components/ui/card";
+import { useFutureMode } from '@/lib/FutureModeContext';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [query, setQuery] = useState('');
   const router = useRouter();
+  const { isFutureMode } = useFutureMode();
 
   const handleSearch = () => {
     if (query.trim()) {
@@ -20,7 +23,12 @@ export default function Home() {
     <WarpBackground className="min-h-screen w-full p-0 border-none rounded-none">
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
-        <Card className="max-w-4xl w-full bg-white/90 backdrop-blur-sm border-slate-200/50 shadow-xl">
+        <Card className={cn(
+          "max-w-4xl w-full backdrop-blur-sm shadow-xl transition-colors duration-300",
+          isFutureMode 
+            ? "bg-slate-900/95 border-cyan-500/30" 
+            : "bg-white/90 border-slate-200/50"
+        )}>
           <CardContent className="text-center space-y-10 animate-fade-in p-12">
             {/* Hero Text */}
             <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter text-slate-900 drop-shadow-sm">

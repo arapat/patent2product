@@ -695,7 +695,7 @@ Product photography style, high detail, 8K resolution, photorealistic rendering.
             >
               <X className="w-6 h-6 text-white" />
             </button>
-            <div className="bg-white rounded-xl p-4 shadow-2xl">
+            <div className="bg-white future-mode:bg-slate-800 rounded-xl p-4 shadow-2xl">
               <div className="relative w-full h-[70vh]">
                 <Image
                   src={patent.images[selectedImage].local_path}

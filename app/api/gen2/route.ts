@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { fal } from "@fal-ai/client";
 import OpenAI from "openai";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import {
+  createInputHash,
+  getCacheEntry,
+  setCacheEntry,
+} from "@/lib/cache";
 
 // Configure fal.ai
 fal.config({
@@ -49,6 +54,32 @@ export async function POST(req: NextRequest) {
 
     const meta = JSON.parse(metaRaw);
     const { patent_url, patent_id, title, abstract, additionalUserRequest } = meta;
+
+    ////////////////////////////////////////////////////////////////////////////
+    // CACHE: Check if we have a cached response for this input
+    ////////////////////////////////////////////////////////////////////////////
+    const imageBuffer = Buffer.from(await image.arrayBuffer());
+    const inputHash = createInputHash(imageBuffer, meta);
+
+    const cachedEntry = await getCacheEntry(inputHash);
+    if (cachedEntry) {
+      console.log(`[CACHE HIT] Returning cached response for hash: ${inputHash}`);
+      return NextResponse.json(
+        {
+          ...cachedEntry.response,
+          cached: true,
+          cacheTimestamp: cachedEntry.timestamp,
+        },
+        {
+          headers: {
+            "X-Cache": "HIT",
+            "X-Cache-Hash": inputHash,
+          },
+        }
+      );
+    }
+
+    console.log(`[CACHE MISS] Processing new request for hash: ${inputHash}`);
 
     ////////////////////////////////////////////////////////////////////////////
     // 1) Generate JSON prompt using OpenAI
@@ -127,13 +158,16 @@ Generate a JSON prompt that renders this invention as a photorealistic product i
     // 2) Send to Fal "edit-image" model
     ////////////////////////////////////////////////////////////////////////////
 
+    // Create a new File from the buffer for Fal
+    const imageFile = new File([imageBuffer], image.name, { type: image.type });
+
     // Fal client will auto-upload local File objects
     const falResult = await fal.subscribe("fal-ai/alpha-image-232/edit-image", {
       input: {
         prompt: finalPrompt,
         image_size: "auto",
         output_format: "png",
-        image_urls: [image], // <— just send the File object
+        image_urls: [imageFile], // <— just send the File object
       },
       logs: false,
     });
@@ -165,17 +199,36 @@ Generate a JSON prompt that renders this invention as a photorealistic product i
     const s3Url = `https://${bucketName}.s3.${awsRegion}.amazonaws.com/${s3Key}`;
 
     ////////////////////////////////////////////////////////////////////////////
-    // 4) Return final response
+    // 4) Build and cache response
     ////////////////////////////////////////////////////////////////////////////
-
-    return NextResponse.json({
+    const responseData = {
       success: true,
       patent: meta,
       generatedPrompt,
       falOutput: falResult.data,
       falRequestId: falResult.requestId,
       s3Url,
-    });
+    };
+
+    // Cache the successful response for future requests
+    await setCacheEntry(inputHash, imageBuffer, meta, responseData);
+    console.log(`[CACHE WRITE] Cached response for hash: ${inputHash}`);
+
+    ////////////////////////////////////////////////////////////////////////////
+    // 5) Return final response
+    ////////////////////////////////////////////////////////////////////////////
+    return NextResponse.json(
+      {
+        ...responseData,
+        cached: false,
+      },
+      {
+        headers: {
+          "X-Cache": "MISS",
+          "X-Cache-Hash": inputHash,
+        },
+      }
+    );
   } catch (err: any) {
     console.error("API error:", err);
     return NextResponse.json(

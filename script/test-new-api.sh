@@ -1,0 +1,4 @@
+curl -X POST http://localhost:3000/api/gen2 \
+  -H "Accept: application/json" \
+  -F 'meta={"patent_url":"https://patents.google.com/patent/US20120281344A1/en","patent_id":"US20120281344A1","title":"Media player with machined window undercut and transparent wall disposed therein","abstract":"A media player comprising a display screen is provided. The media player can include a housing having an opening and an area of reduced thickness around the opening. The media player can also include a transparent wall having a flange. Alternatively, the transparent wall may not require a flange but rather can be a flat, substantially transparent piece of material such as plexiglass or glass. The flange can be adhered to a surface of the area of reduced thickness in order to form a transparent protective cover for the display screen."}' \
+  -F "image=@./page_2.png"

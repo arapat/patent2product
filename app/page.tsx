@@ -32,12 +32,12 @@ export default function Home() {
           <CardContent className="text-center space-y-10 animate-fade-in p-12">
             {/* Hero Text */}
             <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter text-slate-900 drop-shadow-sm">
-              From <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-teal-600">Patent</span> <br />
-              to <span className="text-transparent bg-clip-text bg-linear-to-r from-green-600 to-lime-600">Product.</span>
+              See the <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-teal-600">Future.</span> <br />
+              Before It Ships.
             </h1>
 
             <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
-                Discover hidden gems in patent databases and visualize their commercial potential instantly using generative intelligence.
+                Transform patent drawings into photorealistic product renderings. Visualize unreleased technology from Apple, Tesla, Meta, and beyond—instantly.
             </p>
 
             {/* Search Section */}
@@ -48,14 +48,14 @@ export default function Home() {
                         onChange={(e) => setQuery(e.target.value)}
                         onSearch={handleSearch}
                         large
-                        placeholder="Search patents (e.g., 'Solid state batteries')"
+                        placeholder="Search patents (e.g., 'AR glasses', 'flying car', 'humanoid robot')"
                     />
                 </div>
             </div>
 
             {/* Tags */}
             <div className="flex flex-wrap justify-center gap-3 pt-4 opacity-70">
-                {['Biotech', 'Robotics', 'Clean Energy', 'AI', 'Nanotech'].map(tag => (
+                {['Consumer Electronics', 'Automotive', 'Aerospace', 'Wearables', 'Robotics'].map(tag => (
                     <button
                         key={tag}
                         onClick={() => {

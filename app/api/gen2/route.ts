@@ -136,12 +136,12 @@ Generate a JSON prompt that renders this invention as a photorealistic product i
 `;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-5.1",
+      model: "gpt-5-nano-2025-08-07",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
       ],
-      temperature: 0.7,
+      // temperature: 0.7,
     });
 
     const rawJSON = completion.choices[0].message.content ?? "{}";

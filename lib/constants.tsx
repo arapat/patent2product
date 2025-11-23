@@ -173,4 +173,17 @@ export const MOCK_PATENTS = [
         pdf_local_path: "/assets/US11485489B2/pdf/patent.pdf",
         tags: ["VTOL", "Aviation", "Flying Car"]
     },
+    {
+        id: "p7",
+        page_url: "https://patents.google.com/patent/US11571938B2/",
+        title: "Jet-propelled VTOL hybrid car",
+        pdf_url: "https://patentimages.storage.googleapis.com/15/97/2b/cae81df2c46f04/US11571938.pdf",
+        abstract: "A hybrid VTOL jet car comprising a light weight floatable chassis adapted for carrying a payload, a retractable tail section attached to a light weight floatable chassis at the rear end adapted for stabilizing the hybrid VTOL jet car, a plurality of wheels at the bottom of the hybrid VTOL jet car, a plurality of retractable wings on the sides of light weight floatable chassis, adapted for maneuvering the hybrid VTOL jet car. Further features may include a plurality of thrust-producing engines adapted for generating the thrust required for driving the hybrid VTOL jet car on a surface as well as in the air and a plurality of parachutes attached to the hybrid VTOL jet car to safely land the hybrid VTOL jet car under emergency.",
+        images: Array.from({ length: 32 }, (_, i) => ({
+            url: "",
+            local_path: `/assets/US11571938B2/pdf_images/page_${i + 1}.png`
+        })),
+        pdf_local_path: "/assets/US11571938B2/pdf/patent.pdf",
+        tags: ["VTOL", "Aviation", "Hybrid", "Jet Propulsion"]
+    },
 ];

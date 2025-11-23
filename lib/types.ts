@@ -5,14 +5,20 @@ export enum LoadingState {
     ERROR = 'ERROR'
 }
 
+export interface PatentImage {
+    url: string;
+    local_path: string;
+}
+
 export interface Patent {
     id: string;
+    page_url: string;
     title: string;
-    patentNumber: string;
-    summary: string;
-    productIdea: string;
-    viabilityScore: number;
-    tags: string[];
+    pdf_url: string;
+    abstract: string;
+    images: PatentImage[];
+    pdf_local_path: string;
+    tags?: string[];
 }
 
 export interface NavItem {

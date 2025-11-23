@@ -31,17 +31,11 @@ function ResultsContent() {
         // Search in title
         if (patent.title.toLowerCase().includes(searchLower)) return true;
 
-        // Search in summary
-        if (patent.summary.toLowerCase().includes(searchLower)) return true;
+        // Search in abstract
+        if (patent.abstract.toLowerCase().includes(searchLower)) return true;
 
-        // Search in product idea
-        if (patent.productIdea.toLowerCase().includes(searchLower)) return true;
-
-        // Search in patent number
-        if (patent.patentNumber.toLowerCase().includes(searchLower)) return true;
-
-        // Search in tags
-        if (patent.tags.some(tag => tag.toLowerCase().includes(searchLower))) return true;
+        // Search in tags (if they exist)
+        if (patent.tags && patent.tags.some(tag => tag.toLowerCase().includes(searchLower))) return true;
 
         return false;
       });
